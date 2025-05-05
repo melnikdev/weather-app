@@ -6,10 +6,10 @@ namespace App\Services;
 
 use App\DTO\WeatherData;
 use App\Entities\Weather;
+use App\Exceptions\InvalidWeatherException;
 use App\Repositories\WeatherRepositoryInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use Tests\TestCase;
 
 readonly class WeatherService
 {
@@ -24,10 +24,15 @@ readonly class WeatherService
     /**
      * @throws GuzzleException
      * @throws \JsonException
+     * @throws InvalidWeatherException
      */
     public function getWeather(string $city): Weather
     {
-        $weatherArray = $this->getWeatherByCity($city);
+        try {
+            $weatherArray = $this->getWeatherByCity($city);
+        } catch (\Exception $exception) {
+            throw new InvalidWeatherException($exception->getMessage());
+        }
         return $this->repository->create($weatherArray);
     }
 

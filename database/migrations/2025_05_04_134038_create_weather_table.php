@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('country');
             $table->string('city');
-            $table->string('temperature');
+            $table->float('temperature');
             $table->string('condition');
-            $table->string('humidity');
-            $table->string('wind_speed');
-            $table->string('last_updated');
+            $table->integer('humidity');
+            $table->float('wind_speed');
+            $table->dateTime('last_updated');
             $table->timestamps();
         });
     }

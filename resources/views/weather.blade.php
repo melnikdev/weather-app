@@ -20,14 +20,23 @@
         @endif
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-    <div>
-        <p>{{ $weather->city }}</p>
-        <hr>
-        <p>Temperature: {{ $weather->temperature }}</p>
-        <p>Condition: {{ $weather->condition }}</p>
-        <p>Humidity: {{ $weather->humidity }}</p>
-        <p>Wind Speed: {{ $weather->windSpeed }}</p>
-        <p>Last Updated: {{ $weather->lastUpdated }}</p>
-    </div>
+    @if (isset($weather->error))
+        <div>
+            <p>{{ $weather->city }}</p>
+            <hr>
+            <p>Error: {{ $weather->error }}</p>
+        </div>
+    @else
+        <div>
+            <p>{{ $weather->city }}</p>
+            <hr>
+            <p>Temperature: {{ $weather->temperature }}</p>
+            <p>Condition: {{ $weather->condition }}</p>
+            <p>Humidity: {{ $weather->humidity }}</p>
+            <p>Wind Speed: {{ $weather->windSpeed }}</p>
+            <p>Last Updated: {{ $weather->lastUpdated }}</p>
+        </div>
+    @endif
+
     </body>
 </html>
